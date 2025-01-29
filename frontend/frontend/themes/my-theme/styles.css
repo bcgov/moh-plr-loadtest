@@ -1,0 +1,125 @@
+/*
+   CSS styling examples for the Vaadin app.
+
+   Visit https://vaadin.com/docs/styling/application-theme/ for more information.
+*/
+
+/* Example: CSS class name to center align the content . */
+.centered-content {
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+/* Example: the style is applied to all numberfields which have the `bordered` class name. Type of field can be specified. */
+vaadin-number-field.bordered::part(input-field) {
+  box-shadow: inset 0 0 0 1px var(--lumo-contrast-30pct);
+  background-color: var(--lumo-base-color);
+}
+
+vaadin-text-field.bordered::part(input-field) {
+  box-shadow: inset 0 0 0 1px var(--lumo-contrast-30pct);
+  background-color: var(--lumo-base-color);
+}
+
+vaadin-radio-group {
+  padding: 15px;
+  border-style: solid;
+  border-color: gainsboro;
+  border-radius: 5px;
+}
+
+vaadin-number-field.bordered::part(label),
+vaadin-combo-box.bordered::part(label),
+vaadin-checkbox::part(label) {
+  font-size: 14px;
+  color: rgb(118, 118, 118);
+  font-style: normal;
+  font-weight: 100;
+}
+
+vaadin-number-field:focus-within::part(label),
+vaadin-combo-box:focus-within::part(label) {
+  font-size: 14px;
+  color: rgb(26, 77, 245);
+}
+
+h4 {
+  color: rgb(118, 118, 118);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 100;
+  line-height: 1;
+  padding-right: 1em;
+  padding-bottom: 0.5em;
+  padding-top: 1em;
+}
+
+.message-container {
+  padding: 20px;
+  border-style: solid;
+  border-color: gainsboro;
+  border-radius: 5px;
+  background-color:whitesmoke;
+}
+
+a[highlight] {
+  font-weight: bold;
+}
+
+.running {
+  border: 5px solid var(--lumo-primary-color);
+  border-radius: 5px;
+}
+
+.completed {
+  border: 2px solid var(--lumo-success-color);
+  color: #23ce23;
+  border-radius: 5px;
+}
+.failed {
+  border: 2px solid var(--lumo-error-color);
+  border-radius: 5px;
+}
+.extractionIndicatorHidden{
+  visibility: hidden;
+}
+
+.floatingButton {
+  z-index: 999;
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  font-size: 20px;
+  outline: #23ce23;
+  outline-width: 5px;
+  outline-style: outset;
+  background-color: #4aa66e;
+  color: white;
+  min-width: 150px;
+}
+
+.sideDrawer{
+  background-color: #38598a;
+  height: 100%;
+}
+
+.headerTitle{
+  color: white;
+  font-size: larger;
+}
+
+.headerPanel{
+  background-color: #036;
+
+}
+
+.drawerLink{
+  color: white;
+  font-size: large;
+  font-weight: bold;
+}
+
+/*As we have some Attribute headers added, we want to use the same effect that Vaadin uses to make consistency*/
+.disabled-effect-headers{
+  color: var(--lumo-contrast-30pct)
+}

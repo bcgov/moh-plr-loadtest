@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Test Harness</title>
+  <style>
+    body {
+      height: 100vh;
+      margin: 0;
+    }
+
+    #outlet {
+      height: 100%;
+    }
+  </style>
+  <link rel=stylesheet href=https://cdn.jsdelivr.net/npm/pretty-print-json@3.0/dist/css/pretty-print-json.css>
+  <script src=https://cdn.jsdelivr.net/npm/pretty-print-json@3.0/dist/pretty-print-json.min.js></script>
+  <script>
+    function isValidJSON(str) {
+      try {
+          JSON.parse(str);
+          return true;
+      } catch (e) {
+          return false;
+      }
+    }
+  </script>
+  <!-- index.ts is included here automatically (either by the dev server or during the build) -->
+</head>
+<body>
+  <div id="outlet"></div>
+</body>
+</html>
