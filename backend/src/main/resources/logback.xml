@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- <configuration>
+
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%-5level] %logger{15} - %msg%n%rEx</pattern>
+		</encoder>
+		<immediateFlush>false</immediateFlush>
+	</appender>
+
+	
+	<root level="WARN">
+		<appender-ref ref="CONSOLE" />
+	</root>
+
+</configuration> -->
+<!-- <statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener" /> -->
+<!-- <configuration scan="true">
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <appender name="logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <param name="Encoding" value="UTF-8"/>
+		<destination>localhost:9600</destination>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <customFields>{"app_name":"demo", "host":"localhost","app_port": "9080"}</customFields>
+        </encoder>
+    </appender>
+    <root level="INFO">
+        <appender-ref ref="logstash"/>
+    </root>
+
+</configuration> -->
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+    
+        <logger name="com.example.demo" 
+        level="INFO" >
+           
+        </logger>
+</configuration>
