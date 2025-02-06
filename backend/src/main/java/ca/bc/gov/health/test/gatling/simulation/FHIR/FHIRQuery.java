@@ -18,7 +18,7 @@ public class FHIRQuery extends BaseSimulation {
     private static final Logger logger = LoggerFactory.getLogger(FHIRQuery.class);
 
     private String ENDPOINT_URL;
-    private String env = "DEV";
+    private String env = "";
     String MSG_SPEC = "FHIR";
     boolean hasIPC = false;
     boolean hasCPN = false;

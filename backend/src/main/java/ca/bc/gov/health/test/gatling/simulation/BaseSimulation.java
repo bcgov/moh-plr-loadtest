@@ -1,5 +1,6 @@
 package ca.bc.gov.health.test.gatling.simulation;
 
+import static ca.bc.gov.health.test.constants.SimulationConstants.*;
 import static io.gatling.javaapi.core.CoreDsl.bodyString;
 import static io.gatling.javaapi.core.CoreDsl.feed;
 import static io.gatling.javaapi.core.CoreDsl.repeat;
@@ -27,17 +28,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ca.bc.gov.health.test.config.SimulationConfig;
-import ca.bc.gov.health.test.constants.SimulationConstants;
 import ca.bc.gov.health.test.model.MessageResponse;
-import ca.bc.gov.health.test.security.Authorization;
+import ca.bc.gov.health.test.security.RequestProcessor;
 
 
-public class BaseSimulation extends Simulation implements SimulationConstants{
+public class BaseSimulation extends Simulation implements SimulationRemote {
     
     private static final Logger logger = LoggerFactory.getLogger(BaseSimulation.class);
     protected final int msToSec = 1000;
 
-    protected Authorization auth = new Authorization();
+    protected RequestProcessor auth = new RequestProcessor();
     protected Integer dbRecordsCount = 0;
 
     protected String dbURL = "";
@@ -45,7 +45,7 @@ public class BaseSimulation extends Simulation implements SimulationConstants{
     protected String dbPwd = "";
    
 
-    protected String env = "MERGE";
+    protected String env = "";
     protected Integer totalRecords = -1;
     protected Integer totalUsers = 1;
     protected Integer numberOfRecords = -1;

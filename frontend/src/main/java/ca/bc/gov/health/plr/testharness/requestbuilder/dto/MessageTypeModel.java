@@ -4,7 +4,6 @@ public class MessageTypeModel {
 
     private String id;
     private String messageTypeName;
-    private String msgSpec;
     private String environmentName;
     private int numberOfRecords;
     private int numberOfUsers;
@@ -26,14 +25,6 @@ public class MessageTypeModel {
 
     public void setMessageTypeName(String messageTypeName) {
         this.messageTypeName = messageTypeName;
-    }
-
-    public String getMsgSpec() {
-        return msgSpec;
-    }
-
-    public void setMsgSpec(String msgSpec) {
-        this.msgSpec = msgSpec;
     }
 
     public String getEnvironmentName() {

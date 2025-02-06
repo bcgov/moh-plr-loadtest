@@ -18,7 +18,6 @@ public class MessageComponent extends VerticalLayout{
 
     ComboBox<String> environmentName = new ComboBox<>();
     ComboBox<String> messageType = new ComboBox<>();
-    RadioButtonGroup<String> messageSpec = new RadioButtonGroup<>();
     NumberField numRequests = new NumberField("Maximum # Records");
     NumberField numUsers = new NumberField("Maximum # Concurrent Users");
     NumberField pauseDuration = new NumberField("Pause Duration (milliseconds)");
@@ -62,9 +61,6 @@ public class MessageComponent extends VerticalLayout{
              }
         });
 
-        messageSpec.setItems( "FHIR");
-        messageSpec.setErrorMessage("Required");
-
         numRequests.setWidth("350px");
         numRequests.addClassName("bordered");
         numRequests.setErrorMessage("Required");
@@ -82,7 +78,7 @@ public class MessageComponent extends VerticalLayout{
 
         HorizontalLayout viewStatus = new HorizontalLayout(completedTag,failedTag);
         
-        add(viewStatus, environmentName, messageType, messageSpec, numRequests, numUsers, pauseDuration);
+        add(viewStatus, environmentName, messageType, numRequests, numUsers, pauseDuration);
     }
 
     public String[] getEnvironemntNames(){
@@ -133,14 +129,6 @@ public class MessageComponent extends VerticalLayout{
 
     public void setMessageType(ComboBox<String> messageType) {
         this.messageType = messageType;
-    }
-
-    public RadioButtonGroup<String> getMessageSpec() {
-        return messageSpec;
-    }
-
-    public void setMessageSpec(RadioButtonGroup<String> messageSpec) {
-        this.messageSpec = messageSpec;
     }
 
     public NumberField getNumRequests() {
