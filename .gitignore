@@ -27,7 +27,11 @@ replay_pid*
 # application config files
 application.properties
 
+# env files
+*.env
+
 backend/log.txt
 frontend/.idea/
 frontend/frontend/generated/
 frontend/target/
+compose/gatling
