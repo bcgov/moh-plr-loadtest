@@ -26,3 +26,8 @@ replay_pid*
 
 # application config files
 application.properties
+
+backend/log.txt
+frontend/.idea/
+frontend/frontend/generated/
+frontend/target/
