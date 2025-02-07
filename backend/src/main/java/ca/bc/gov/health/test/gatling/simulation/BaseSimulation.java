@@ -63,8 +63,8 @@ public class BaseSimulation extends Simulation implements SimulationRemote {
 protected HttpProtocolBuilder setBaseHttpProtocol(String env) {
         String rootUrl;
         String hostHeader;
-        rootUrl = config.getString(PLR_MRG_API_HOST_URL);
-        hostHeader = config.getString(PLR_MRG_HEADER_API_HOST);
+        rootUrl = config.getString(PLR_API_HOST_URL);
+        hostHeader = config.getString(PLR_HEADER_API_HOST);
         HashMap<String, String> headers = new HashMap<String,String>() ;
    
         // headers.put(HttpHeaders.ACCEPT, "application/fhir+json;fhirVersion=4.0;BCPLRVersion=1");
@@ -232,9 +232,9 @@ protected HttpProtocolBuilder setBaseHttpProtocol(String env) {
         if(numberOfRecords==null){
             numberOfRecords = -1;
         }
-        dbURL = config.getString(PLR_MRG_DB_URL);
-        dbUser = config.getString(PLR_MRG_DB_USER);
-        dbPwd = config.getString(PLR_MRG_DB_PASSWORD);
+        dbURL = config.getString(PLR_DB_URL);
+        dbUser = config.getString(PLR_DB_USER);
+        dbPwd = config.getString(PLR_DB_PASSWORD);
      
         if(numberOfRecords>0){
             sql +=  "   FETCH FIRST " + numberOfRecords.toString() + " ROWS ONLY "; 

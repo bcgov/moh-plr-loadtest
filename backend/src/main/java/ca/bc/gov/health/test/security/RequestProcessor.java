@@ -50,7 +50,7 @@ public class RequestProcessor implements SimulationRemote {
 		
 		NameValuePair grantType = new BasicNameValuePair("grant_type", config.getString(COMMON_LOGIN_AUTH_GRANT_TYPE));
 		NameValuePair clientId = new BasicNameValuePair("client_id", config.getString(COMMON_LOGIN_AUTH_CLIENT_IDS));
-		NameValuePair clientSecret = new BasicNameValuePair("client_secret", config.getString(COMMON_LOGIN_AUTH_CLIENT_SECRETS_MRG));
+		NameValuePair clientSecret = new BasicNameValuePair("client_secret", config.getString(COMMON_LOGIN_AUTH_CLIENT_SECRETS));
 
 		params.add(grantType);
 		params.add(clientId);
