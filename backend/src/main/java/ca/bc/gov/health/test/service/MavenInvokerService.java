@@ -16,20 +16,20 @@ public class MavenInvokerService {
         try {
             // String prefix ="v2.gatling."+ RunIdConverter.getRoundStartTime(5) +".`localhost:3000`"; //".`hostname`";
             // String command = "GATLING_PREFIX="+prefix+" mvn gatling:test -Dgatling.simulationClass="+simulation+" "+getParameters(queryParameters);
-            String command = "mvn gatling:test -Dgatling.simulationClass=" + simulation + " " + getParameters(queryParameters);
-            //getParameters(queryParameters);
-            ProcessBuilder processBuilder = getProcess(command);
+            if (isValidParameter(simulation)) {
+                String command = "mvn gatling:test -Dgatling.simulationClass=" + sanitize(simulation) + " " + getParameters(queryParameters);
+                ProcessBuilder processBuilder = getProcess(command);
 
-            Process process = processBuilder.start();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                logger.info(line);
+                Process process = processBuilder.start();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    logger.info(line);
+                }
+
+                exitCode = process.waitFor();
+                logger.info("\nExited with code : {}", exitCode);
             }
-
-            exitCode = process.waitFor();
-            logger.info("\nExited with code : {}", exitCode);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -67,8 +67,7 @@ public class MavenInvokerService {
         if (command != null) {
             Map<String, String> env = processBuilder.environment();
 
-            if (env.containsKey("SystemRoot") && env.get("SystemRoot") != null
-                    && env.get("SystemRoot").substring(3).equalsIgnoreCase("WINDOWS")) {
+            if (env.containsKey("SystemRoot") && env.get("SystemRoot") != null && env.get("SystemRoot").substring(3).equalsIgnoreCase("WINDOWS")) {
                 isWindows = true;
             }
             if (isWindows) {
