@@ -31,8 +31,7 @@ public class RequestProcessor implements SimulationRemote {
 	private final List<Header> headers = new ArrayList<Header>();
 	private final Header headerContent = new BasicHeader(HttpHeaders.CONTENT_TYPE, "application/x-www-form-urlencoded");
 	private final Header headerAccept = new BasicHeader(HttpHeaders.ACCEPT, "application/json");
-	final Configuration config = SimulationConfig.getConfig();
-	
+
 	CloseableHttpClient client;
 	HttpPost httpPost;
 	String targetAuthEnvironment;

@@ -37,14 +37,28 @@ public class MavenInvokerService {
     }
 
     static String getParameters(Map<String, String> queryParameters) {
-        String parameters = "";
+        StringBuilder parameters = new StringBuilder();
         if (!CollectionUtils.isEmpty(queryParameters)) {
             for (Map.Entry<String, String> entry : queryParameters.entrySet()) {
-                logger.info("Key: {}, Value: {}", entry.getKey(), entry.getValue());
-                parameters += "-D" + entry.getKey() + "=" + entry.getValue() + " ";
+                if (isValidParameter(entry.getKey()) && isValidParameter(entry.getValue())) {
+                    String key = sanitize(entry.getKey());
+                    String value = sanitize(entry.getValue());
+                    logger.info("Key: {}, Value: {}", key, value);
+                    parameters.append("-D").append(key).append("=").append(value).append(" ");
+                } else {
+                    logger.warn("Invalid parameter: Key: {}, Value: {}", entry.getKey(), entry.getValue());
+                }
             }
         }
-        return parameters;
+        return parameters.toString();
+    }
+
+    static boolean isValidParameter(String param) {
+        return param != null && param.matches("^[a-zA-Z0-9._-]+$");
+    }
+
+    private static String sanitize(String input) {
+        return input.replaceAll("[^a-zA-Z0-9._-]", "");
     }
 
     static ProcessBuilder getProcess(String command) {

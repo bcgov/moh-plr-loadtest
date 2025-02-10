@@ -54,7 +54,6 @@ public class BaseSimulation extends Simulation implements SimulationRemote {
     protected Integer currentiterations = 0;
     protected String MSG_SPEC = "";
     
-    final Configuration config = SimulationConfig.getConfig();
     protected List<MessageResponse> syncResponses = new ArrayList<MessageResponse>();
     protected List<MessageResponse> asyncResponses = new ArrayList<MessageResponse>();
 
