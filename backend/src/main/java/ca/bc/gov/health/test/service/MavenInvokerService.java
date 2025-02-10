@@ -61,10 +61,15 @@ public class MavenInvokerService {
         return input.replaceAll("[^a-zA-Z0-9._-]", "");
     }
 
+    static boolean isValidCommand(String command) {
+        return command != null && command.contains("mvn gatling:test -Dgatling.simulationClass=");
+    }
+
     static ProcessBuilder getProcess(String command) {
         boolean isWindows = false;
         ProcessBuilder processBuilder = new ProcessBuilder();
-        if (command != null) {
+        logger.info("command : {}", command);
+        if (isValidCommand(command)) {
             Map<String, String> env = processBuilder.environment();
 
             if (env.containsKey("SystemRoot") && env.get("SystemRoot") != null && env.get("SystemRoot").substring(3).equalsIgnoreCase("WINDOWS")) {
@@ -77,6 +82,9 @@ public class MavenInvokerService {
                 logger.info("EXECUTING in Linux");
                 processBuilder.command("/bin/bash", "-c", command);
             }
+        }
+        else{
+            logger.error("Invalid command: {}", command);
         }
         return processBuilder;
     }
