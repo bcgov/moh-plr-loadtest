@@ -35,3 +35,4 @@ frontend/.idea/
 frontend/frontend/generated/
 frontend/target/
 compose/gatling
+.idea/
