@@ -11,7 +11,7 @@ public class SimulationService {
     private static final Logger logger = LoggerFactory.getLogger(SimulationService.class);
 
     public int process(Map<String, String> queryParameters, String simulation){
-        logger.info("Starting getFHIRQuery Simulation");
+        logger.info("Starting providerByIdFHIR Simulation");
         return MavenInvokerService.runMavenCommand(simulation, queryParameters);
     }
 

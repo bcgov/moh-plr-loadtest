@@ -66,7 +66,7 @@ public class FHIRQuery extends BaseSimulation {
 
                 ENDPOINT_URL = HSAUrlEnum.findByIdentifierType("PROVIDER_ID").url()
                         + PlrNamingSystemEnum.findByIdentifierType(type).namingSystemURL() + "|";
-                System.out.println("ENDPOINT_URL: " + ENDPOINT_URL);
+                logger.info("ENDPOINT_URL: {}", ENDPOINT_URL);
 
 
                 auth.init(env);
@@ -100,7 +100,7 @@ public class FHIRQuery extends BaseSimulation {
         String sql = "";
         try {
             sql = String.format(QueryEnum.findByIdentifier("PROVIDER_ID").query(), type);
-            System.out.println("sql: " + sql);
+            logger.info("sql: {}", sql);
         } catch (Exception e) {
             e.printStackTrace();
             logger.error("Error in getQuery()", e);

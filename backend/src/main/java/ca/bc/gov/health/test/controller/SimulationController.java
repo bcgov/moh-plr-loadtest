@@ -28,12 +28,6 @@ public class SimulationController {
         return ResponseEntity.ok("{\"Health Check - Status OK\"}");
     }
 
-    @GetMapping("/getFHIRQuery")
-    public ResponseEntity<String> getDemoFHIR(@RequestParam Map<String, String> queryParameters) {
-        int status = service.process(queryParameters, "ca.bc.gov.health.test.gatling.simulation.FHIR.FHIRQuery");
-        return ResponseEntity.ok("{\"status\":\"providers processed\", \"code\":" + status + "}");
-    }
-
     @PostMapping("/providerByIdFHIR")
     public ResponseEntity<String> providerByIdFHIR(@RequestParam Map<String, String> queryParameters) {
         int status = service.process(queryParameters, "ca.bc.gov.health.test.gatling.simulation.FHIR.FHIRQuery");
