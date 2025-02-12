@@ -40,7 +40,7 @@ Add some content describing the frontend component.
 - Copy the environment files backend.env and frontend.env file for backend and frontend in /compose folder:
     /compose/backend.env
     /compose/frontend.env
-- Start the backend and frontend component by running the following command when you're in backend directory in the /compose folder: 'docker compose up'.
-  This will build and start the components and backend be available on port 9080 and frontend will be available on port 9090.
-- Execute PLR Test Harness in a specific environment (local is pointed to Merge) and fetch the Gatling reports at: 'moh-plr-loadtest/compose/gatling/'
+- Start the backend and frontend component by running the following command when you're in /compose directory: 'docker compose up'.
+  This will build and start the components. Backend will be available on port 9080 and frontend will be available on port 9090.
+- Execute PLR Test Harness in a specific environment (local is pointed to Merge) and can fetch the Gatling reports at: 'moh-plr-loadtest/compose/gatling/'
 - Templates for environment files are available at compose/backend-template.env and compose/frontend-template.env 
