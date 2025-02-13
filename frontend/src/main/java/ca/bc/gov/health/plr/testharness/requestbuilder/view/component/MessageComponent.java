@@ -4,21 +4,23 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.bc.gov.health.plr.testharness.requestbuilder.config.AppConfig;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 import com.vaadin.flow.component.textfield.NumberField;
 
-import ca.bc.gov.health.plr.testharness.requestbuilder.code.EnvironmentName;
 import ca.bc.gov.health.plr.testharness.requestbuilder.code.MessageType;
+import org.apache.commons.configuration2.Configuration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MessageComponent extends VerticalLayout{
 
+    private static final Logger log = LoggerFactory.getLogger(MessageComponent.class);
     ComboBox<String> environmentName = new ComboBox<>();
     ComboBox<String> messageType = new ComboBox<>();
-    RadioButtonGroup<String> messageSpec = new RadioButtonGroup<>();
     NumberField numRequests = new NumberField("Maximum # Records");
     NumberField numUsers = new NumberField("Maximum # Concurrent Users");
     NumberField pauseDuration = new NumberField("Pause Duration (milliseconds)");
@@ -26,11 +28,13 @@ public class MessageComponent extends VerticalLayout{
     Button failedTag = new Button("Failed");
     QueryProviderIdentifierSearchComponent queryProviderIdentifierSearchComponent = new QueryProviderIdentifierSearchComponent();
 
+    protected final Configuration config = AppConfig.getConfig();
+
     public MessageComponent(){
         addClassName("message-container");
 
         environmentName.setLabel("Choose Environment:");
-        environmentName.setItems(getEnvironemntNames());
+        environmentName.setItems(getEnvironmentNames());
 
         environmentName.addClassName("bordered");
         environmentName.setErrorMessage("Required");
@@ -62,9 +66,6 @@ public class MessageComponent extends VerticalLayout{
              }
         });
 
-        messageSpec.setItems( "FHIR");
-        messageSpec.setErrorMessage("Required");
-
         numRequests.setWidth("350px");
         numRequests.addClassName("bordered");
         numRequests.setErrorMessage("Required");
@@ -82,24 +83,13 @@ public class MessageComponent extends VerticalLayout{
 
         HorizontalLayout viewStatus = new HorizontalLayout(completedTag,failedTag);
         
-        add(viewStatus, environmentName, messageType, messageSpec, numRequests, numUsers, pauseDuration);
+        add(viewStatus, environmentName, messageType, numRequests, numUsers, pauseDuration);
     }
 
-    public String[] getEnvironemntNames(){
-        Class<?> envClass = EnvironmentName.class;
-        Field[] fields = envClass.getDeclaredFields();
-        List<String> envTypes = new ArrayList<>();
-        for(Field field: fields){
-            field.setAccessible(true);
-            try {
-                envTypes.add((String)field.get(null));
-            } catch (IllegalArgumentException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
-        }
-        return envTypes.toArray(new String[fields.length]);
+    public String[] getEnvironmentNames(){
+        String envs = config.getString("env.names");
+        log.info("getEnvironmentNames {}", envs);
+        return envs.split(",");
     }
 
     public ComboBox<String> getEnvironmentName() {
@@ -133,14 +123,6 @@ public class MessageComponent extends VerticalLayout{
 
     public void setMessageType(ComboBox<String> messageType) {
         this.messageType = messageType;
-    }
-
-    public RadioButtonGroup<String> getMessageSpec() {
-        return messageSpec;
-    }
-
-    public void setMessageSpec(RadioButtonGroup<String> messageSpec) {
-        this.messageSpec = messageSpec;
     }
 
     public NumberField getNumRequests() {

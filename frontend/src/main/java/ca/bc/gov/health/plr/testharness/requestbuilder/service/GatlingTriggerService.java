@@ -55,7 +55,7 @@ public class GatlingTriggerService {
         uriBuilder.addParameter("users", String.valueOf(model.getNumberOfUsers()));
         uriBuilder.addParameter("records", String.valueOf(model.getNumberOfRecords()));
         uriBuilder.addParameter("pause", String.valueOf(model.getPauseDuration()));
-        uriBuilder.addParameter("spec", String.valueOf(model.getMsgSpec()));
+        uriBuilder.addParameter("spec", "FHIR");
         
         URI uri = uriBuilder.build();
         // Create an HttpGet request with the URI

@@ -1,24 +1,28 @@
 package ca.bc.gov.health.test.gatling.simulation.FHIR;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import ca.bc.gov.health.test.common.HSAUrlEnum;
 import ca.bc.gov.health.test.common.PlrNamingSystemEnum;
 import ca.bc.gov.health.test.common.QueryEnum;
 import ca.bc.gov.health.test.gatling.simulation.BaseSimulation;
 import ca.bc.gov.health.test.model.MessageResponse;
+import io.gatling.javaapi.core.ChainBuilder;
+import io.gatling.javaapi.core.FeederBuilder;
+import io.gatling.javaapi.core.ScenarioBuilder;
 import io.gatling.javaapi.http.HttpProtocolBuilder;
-import static io.gatling.javaapi.core.CoreDsl.*;
-import io.gatling.javaapi.core.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+
+import static io.gatling.javaapi.core.CoreDsl.atOnceUsers;
+import static io.gatling.javaapi.core.CoreDsl.scenario;
 
 public class FHIRQuery extends BaseSimulation {
     private static final Logger logger = LoggerFactory.getLogger(FHIRQuery.class);
 
     private String ENDPOINT_URL;
-    private String env = "DEV";
+    private String env = "";
     String MSG_SPEC = "FHIR";
     boolean hasIPC = false;
     boolean hasCPN = false;
@@ -62,11 +66,13 @@ public class FHIRQuery extends BaseSimulation {
 
                 ENDPOINT_URL = HSAUrlEnum.findByIdentifierType("PROVIDER_ID").url()
                         + PlrNamingSystemEnum.findByIdentifierType(type).namingSystemURL() + "|";
-                System.out.println("ENDPOINT_URL: " + ENDPOINT_URL);
+                logger.info("ENDPOINT_URL: {}", ENDPOINT_URL);
+
+
                 auth.init(env);
                 pauseDuration = 1;
                 calculateIterations();
-                invoke();
+                invoke(env);
             } else {
                 logger.error("Number of Records is 0. Exiting Simulation");
             }
@@ -77,9 +83,9 @@ public class FHIRQuery extends BaseSimulation {
 
     }
 
-    public void invoke() {
-        FeederBuilder<Object> feeder = setFeeder(getQuery(), MSG_SPEC);
-        ChainBuilder chainBuilder = buildFHIRChain(feeder, SIMULATION_TITLE, ENDPOINT_URL);
+    public void invoke(String env) {
+        FeederBuilder<Object> feeder = setFeeder(getQuery(), MSG_SPEC, env);
+        ChainBuilder chainBuilder = buildFHIRChain(feeder, SIMULATION_TITLE, ENDPOINT_URL, env);
         HttpProtocolBuilder httpProtocol = setBaseHttpProtocol(env);
         ScenarioBuilder scenario = scenario(SIMULATION_TITLE).exec(chainBuilder);
         setUp(scenario.injectOpen(atOnceUsers(concurrentUsers))).protocols(httpProtocol);
@@ -94,7 +100,7 @@ public class FHIRQuery extends BaseSimulation {
         String sql = "";
         try {
             sql = String.format(QueryEnum.findByIdentifier("PROVIDER_ID").query(), type);
-            System.out.println("sql: " + sql);
+            logger.info("sql: {}", sql);
         } catch (Exception e) {
             e.printStackTrace();
             logger.error("Error in getQuery()", e);

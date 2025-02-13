@@ -149,8 +149,7 @@ public class SimulationTestView extends VerticalLayout {
         mtm.setEnvironmentName(messageComponent.getEnvironmentName().getValue());
         
         mtm.setMessageTypeName(messageComponent.getMessageType().getValue()); 
-        mtm.setMsgSpec(messageComponent.getMessageSpec().getValue());
-        
+
         if(messageComponent.getMessageType().getValue().equals((MessageType.QUERY_PROVIDER_BY_IDENTIFIER))){
 
             String identifierType = messageComponent.getQueryProviderIdentifierSearchComponent().getIdentifierType().getValue();
@@ -169,7 +168,6 @@ public class SimulationTestView extends VerticalLayout {
     public boolean validateFields(MessageComponent mc){
         boolean isValid = true;
         String typeMessage = mc.getMessageType().getValue();
-        String specMessage = mc.getMessageSpec().getValue();
         Double requestNum = mc.getNumRequests().getValue();
         Double usersNum = mc.getNumUsers().getValue();
         Double pauseDuration = mc.getPauseDuration().getValue();
@@ -181,12 +179,6 @@ public class SimulationTestView extends VerticalLayout {
             mc.getEnvironmentName().setInvalid(true);
             isValid = false;
         }
-
-        if (specMessage == null) {
-            Notification.show("Please select a specific Message Type.");
-            mc.getMessageSpec().setInvalid(true);
-            isValid = false;
-        } 
         
         if ((requestNum == null) ) { 
             Notification.show("Please fill out Maximum # Records.");

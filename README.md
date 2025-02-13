@@ -27,12 +27,20 @@ Add some content describing the frontend component.
 # Instructions:
 	
 - Pull code from github:
-- Inject the copies of application.properties file for both backend and fronend:
+- Inject the copies of application.properties file for both backend and frontend :
     backend/src/main/resources/application.properties
     frontend/src/main/resources/application.properties
-- Start the backend component by running the following cammand when you're in backend directory in the source code: `mvn spring-boot:run`. This will build and start the backend component that will be available on port 9080.
-- Start the frontend component by running the following cammand when you're in frontend directory in the source code: `mvn spring-boot:run`. This will build and start the frontend component that will be available on port 9090. It also pops up the application in a new browser window.
+- Start the backend component by running the following command when you're in backend directory in the source code: `mvn spring-boot:run`. This will build and start the backend component that will be available on port 9080.
+- Start the frontend component by running the following command when you're in frontend directory in the source code: `mvn spring-boot:run`. This will build and start the frontend component that will be available on port 9090. It also pops up the application in a new browser window.
 
 ## Instructions for docker and docker compose
 
-To be provided
+- Pull code from github.
+- Download Docker desktop and login with your ID.
+- Copy the environment files backend.env and frontend.env file for backend and frontend in /compose folder:
+    /compose/backend.env
+    /compose/frontend.env
+- Start the backend and frontend component by running the following command when you're in /compose directory: 'docker compose up'.
+  This will build and start the components. Backend will be available on port 9080 and frontend will be available on port 9090.
+- Execute PLR Test Harness in a specific environment (local is pointed to Merge) and can fetch the Gatling reports at: 'moh-plr-loadtest/compose/gatling/'
+- Templates for environment files are available at compose/backend-template.env and compose/frontend-template.env 
