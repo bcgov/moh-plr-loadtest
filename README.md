@@ -13,6 +13,9 @@ MavenInvoker collates user inputs, fetch test data and invoke Gatling Simulation
 Gatling.io is used for sending high volume messages. This component would fire message requests to the endpoints chosen by the user.
 The REST APIs invoked by the simulation are authenticated via Key Cloak using IDIR.
 
+A Gatling report is created which will have 'Run Information Description' about following variables passed from UI:
+runType, hasCPN, hasIPC, users, records, pause, environment, spec etc.
+
 ## Frontend
 
 Front End Web is built using Vaadin and Spring-boot. This captures form inputs and triggers backend components based on user actions.
