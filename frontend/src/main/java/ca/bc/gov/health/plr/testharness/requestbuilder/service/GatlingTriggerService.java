@@ -23,6 +23,8 @@ import ca.bc.gov.health.plr.testharness.requestbuilder.code.GatlingEndpoints;
 import ca.bc.gov.health.plr.testharness.requestbuilder.code.MessageType;
 import ca.bc.gov.health.plr.testharness.requestbuilder.dto.MessageTypeModel;
 
+import static ca.bc.gov.health.plr.testharness.requestbuilder.code.MessageSpec.FHIR;
+
 @Service
 public class GatlingTriggerService {
 
@@ -55,7 +57,7 @@ public class GatlingTriggerService {
         uriBuilder.addParameter("users", String.valueOf(model.getNumberOfUsers()));
         uriBuilder.addParameter("records", String.valueOf(model.getNumberOfRecords()));
         uriBuilder.addParameter("pause", String.valueOf(model.getPauseDuration()));
-        uriBuilder.addParameter("spec", "FHIR");
+        uriBuilder.addParameter("spec", FHIR);
         
         URI uri = uriBuilder.build();
         // Create an HttpGet request with the URI

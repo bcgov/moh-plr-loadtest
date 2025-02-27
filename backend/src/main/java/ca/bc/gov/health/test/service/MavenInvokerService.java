@@ -8,18 +8,30 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Map;
 
+import static ca.bc.gov.health.test.constants.SimulationConstants.PROVIDER_QUERY_DESC;
+
 public class MavenInvokerService {
     private static final Logger logger = LoggerFactory.getLogger(MavenInvokerService.class);
 
     public static int runMavenCommand(String simulation, Map<String, String> queryParameters) {
         int exitCode = -1;
+        StringBuilder command = new StringBuilder();
+
         try {
             // String prefix ="v2.gatling."+ RunIdConverter.getRoundStartTime(5) +".`localhost:3000`"; //".`hostname`";
             // String command = "GATLING_PREFIX="+prefix+" mvn gatling:test -Dgatling.simulationClass="+simulation+" "+getParameters(queryParameters);
             if (isValidParameter(simulation)) {
-                String command = "mvn gatling:test -Dgatling.simulationClass=" + sanitize(simulation) + " " + getParameters(queryParameters);
-                ProcessBuilder processBuilder = getProcess(command);
+                // set parameters to set in env
+                String addParameters = getParameters(queryParameters);
+                String description = getDescription(queryParameters);
 
+                command.append("mvn gatling:test -Dgatling.runDescription=")
+                        .append(description)
+                        .append(" -Dgatling.simulationClass=")
+                        .append(sanitize(simulation))
+                        .append(" ").append(addParameters);
+
+                ProcessBuilder processBuilder = getProcess(command.toString());
                 Process process = processBuilder.start();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
                 String line;
@@ -62,7 +74,20 @@ public class MavenInvokerService {
     }
 
     static boolean isValidCommand(String command) {
-        return command != null && command.contains("mvn gatling:test -Dgatling.simulationClass=");
+        return command != null && command.contains("mvn gatling:test -Dgatling.");
+    }
+
+    static String getDescription(Map<String, String> queryParameters) {
+        return new StringBuilder()
+                .append("\"").append(PROVIDER_QUERY_DESC)
+                .append(" hasCPN=").append(queryParameters.get("hasCPN"))
+                .append(" hasIPC=").append(queryParameters.get("hasIPC"))
+                .append(" users=").append(queryParameters.get("users"))
+                .append(" records=").append(queryParameters.get("records"))
+                .append(" pause=").append(queryParameters.get("pause"))
+                .append(" environment=").append(queryParameters.get("environment"))
+                .append(" spec=").append(queryParameters.get("spec"))
+                .append("\"").toString();
     }
 
     static ProcessBuilder getProcess(String command) {
@@ -82,8 +107,7 @@ public class MavenInvokerService {
                 logger.info("EXECUTING in Linux");
                 processBuilder.command("/bin/bash", "-c", command);
             }
-        }
-        else{
+        } else {
             logger.error("Invalid command: {}", command);
         }
         return processBuilder;

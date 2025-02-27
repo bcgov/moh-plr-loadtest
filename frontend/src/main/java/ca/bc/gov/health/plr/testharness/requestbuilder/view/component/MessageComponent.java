@@ -49,9 +49,9 @@ public class MessageComponent extends VerticalLayout{
         messageType.addClassName("bordered");
         messageType.setErrorMessage("Required");
         messageType.addValueChangeListener(event -> {
-            System.out.println("EventValue:" +event.getValue());
+            log.info("EventValue:{}", event.getValue());
             if (event.getValue().equals(String.valueOf(MessageType.QUERY_PROVIDER_BY_IDENTIFIER))) {
-                System.out.println("Query Provider Identifier Search selected");
+                log.info("Query Provider Identifier Search selected");
                 numRequests.setVisible(true);
                 numRequests.setErrorMessage("Required");
                 numUsers.setVisible(true);
@@ -61,7 +61,7 @@ public class MessageComponent extends VerticalLayout{
                 add(queryProviderIdentifierSearchComponent);
             } 
             else{
-                System.out.println("Not implemented yet.");
+                log.info("Not implemented yet.");
                 remove(queryProviderIdentifierSearchComponent);         
              }
         });

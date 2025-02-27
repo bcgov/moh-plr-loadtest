@@ -2,17 +2,20 @@
 
 The Test Harness is in two components:
 
-Backend API component that accepts load testing requests from via API endpoint and triggers Gatlin load testing tool with parameters passed into the API call.
+Backend API component that accepts load testing requests from via API endpoint and triggers Gatling load testing tool with parameters passed into the API call.
 
 Frontend application - UI that allows you to pick parameters and submit load testing request via Web.
 
 ## Backend design
 
-Add some content describing the backend incl. data extract from DB, triggerring Gatling, API structure
+Data Extractor component is built using Spring Boot to fetch data from the PLR datastore and create messages based on the types selected by the user.
+MavenInvoker collates user inputs, fetch test data and invoke Gatling Simulation.
+Gatling.io is used for sending high volume messages. This component would fire message requests to the endpoints chosen by the user.
+The REST APIs invoked by the simulation are authenticated via Key Cloak using IDIR.
 
 ## Frontend
 
-Add some content describing the frontend component.
+Front End Web is built using Vaadin and Spring-boot. This captures form inputs and triggers backend components based on user actions.
 
 # Development Requirements
 
@@ -42,5 +45,8 @@ Add some content describing the frontend component.
     /compose/frontend.env
 - Start the backend and frontend component by running the following command when you're in /compose directory: 'docker compose up'.
   This will build and start the components. Backend will be available on port 9080 and frontend will be available on port 9090.
-- Execute PLR Test Harness in a specific environment (local is pointed to Merge) and can fetch the Gatling reports at: 'moh-plr-loadtest/compose/gatling/'
+- Execute PLR Test Harness in a specific environment (MERGE is pointed to Merge DB) and can fetch the Gatling reports at: 'moh-plr-loadtest/compose/gatling/'
 - Templates for environment files are available at compose/backend-template.env and compose/frontend-template.env 
+
+## Run app on local (Docker or Podman)
+To start the stack using docker or podman you can use provided cmd files or simply run 'docker compose up' or 'podman compose up' commands from compose directory. 

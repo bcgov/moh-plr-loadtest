@@ -166,7 +166,7 @@ public class BaseSimulation extends Simulation implements SimulationRemote {
             syncResponses.add(responseItem);
         } else {
 
-            if (MSG_SPEC.equals("FHIR")) {
+            if (MSG_SPEC.equals(FHIR)) {
                 JSONObject responseJson = new JSONObject(response);
 
                 String responseCode = responseJson.getJSONArray("entry").getJSONObject(1)
