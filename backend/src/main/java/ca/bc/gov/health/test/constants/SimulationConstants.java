@@ -19,4 +19,7 @@ public class SimulationConstants {
     public static String HEADER_ORG_ID = "HEADER_ORG_ID";
 
     public static String DASH =  "-";
+    public static final String PROVIDER_QUERY_DESC = "providerByIdFHIR";
+    public static final String FHIR = "FHIR";
+
 }

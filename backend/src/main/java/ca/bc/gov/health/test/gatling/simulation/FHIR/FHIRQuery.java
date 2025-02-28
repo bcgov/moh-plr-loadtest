@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 
+import static ca.bc.gov.health.test.constants.SimulationConstants.FHIR;
 import static io.gatling.javaapi.core.CoreDsl.atOnceUsers;
 import static io.gatling.javaapi.core.CoreDsl.scenario;
 
@@ -23,7 +24,7 @@ public class FHIRQuery extends BaseSimulation {
 
     private String ENDPOINT_URL;
     private String env = "";
-    String MSG_SPEC = "FHIR";
+    String MSG_SPEC = FHIR;
     boolean hasIPC = false;
     boolean hasCPN = false;
     String type = "";
