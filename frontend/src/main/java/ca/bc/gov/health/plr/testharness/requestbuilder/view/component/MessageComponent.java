@@ -11,7 +11,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.NumberField;
 
-import ca.bc.gov.health.plr.testharness.requestbuilder.code.MessageType;
+import ca.bc.gov.health.plr.testharness.requestbuilder.common.MessageType;
 import org.apache.commons.configuration2.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
