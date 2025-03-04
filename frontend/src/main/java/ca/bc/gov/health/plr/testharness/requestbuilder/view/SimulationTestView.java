@@ -2,6 +2,7 @@ package ca.bc.gov.health.plr.testharness.requestbuilder.view;
 
 import java.util.UUID;
 
+import ca.bc.gov.health.plr.testharness.requestbuilder.service.SimulationClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,9 +22,8 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.annotation.UIScope;
 
-import ca.bc.gov.health.plr.testharness.requestbuilder.code.MessageType;
+import ca.bc.gov.health.plr.testharness.requestbuilder.common.MessageType;
 import ca.bc.gov.health.plr.testharness.requestbuilder.dto.MessageTypeModel;
-import ca.bc.gov.health.plr.testharness.requestbuilder.service.GatlingTriggerService;
 import ca.bc.gov.health.plr.testharness.requestbuilder.view.component.MessageComponent;
 import ca.bc.gov.health.plr.testharness.requestbuilder.view.component.QueryProviderIdentifierSearchComponent;
 
@@ -33,7 +33,7 @@ import ca.bc.gov.health.plr.testharness.requestbuilder.view.component.QueryProvi
 @PageTitle("Simulation Test")
 public class SimulationTestView extends VerticalLayout {
     
-    public SimulationTestView(@Autowired GatlingTriggerService service) {
+    public SimulationTestView(@Autowired SimulationClientService service) {
         MessageComponent messageComponent = new MessageComponent();
 
         Notification loadNotif = new Notification();
